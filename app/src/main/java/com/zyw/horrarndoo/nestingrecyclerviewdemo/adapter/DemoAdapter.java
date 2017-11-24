@@ -180,7 +180,7 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     /**
      * 添加 Child item
      * <p>
-     * 添加位置为最后一个Group item
+     * child item添加位置永远归属于最后一个Group item
      */
     public void addChild() {
         int addPosition = 0;
