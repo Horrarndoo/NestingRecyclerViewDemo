@@ -28,7 +28,7 @@ public class ParseHelper {
 
     private static List<GroupItemBean> getGroupDatas() {
         List<GroupItemBean> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 5; i++) {
             List<ChildItemBean> childList = new ArrayList<>();
             GroupItemBean bean = new GroupItemBean();
             bean.setItemId(i);
