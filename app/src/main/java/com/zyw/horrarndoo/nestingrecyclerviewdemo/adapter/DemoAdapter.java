@@ -142,11 +142,16 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         }
 
-        if (addPosition == 0) {
-            addPosition = mDatas.size();
+        if (!isHaveGroup()) {//如果列表中没有group，直接在list末尾添加item
+            if (addPosition == 0) {
+                addPosition = mDatas.size();
+            }
         }
 
-        itemId = mDatas.get(addPosition - 1).getItemId() + 1;
+        if (addPosition > 0) {
+            itemId = mDatas.get(addPosition - 1).getItemId() + 1;
+        }
+
         mDatas.add(addPosition, ParseHelper.newNormalItem(itemId));
         notifyItemInserted(addPosition);//通知演示插入动画
         notifyItemRangeChanged(addPosition, mDatas.size() - addPosition);//通知数据与界面重新绑定
@@ -160,7 +165,11 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         int itemId = 0;
 
         if (isHaveGroup()) {
-            itemId = mDatas.get(mDatas.size() - 1).getItemId() + 1;
+            for (int i = 0; i < mDatas.size(); i++) {
+                if (mDatas.get(i).getItemType() == DemoItemBean.TYPE_GROUP) {
+                    itemId = mDatas.get(i).getItemId() + 1;
+                }
+            }
         }
 
         mDatas.add(addPosition, ParseHelper.newGroupItem(itemId));
@@ -174,13 +183,20 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
      * 添加位置为最后一个Group item
      */
     public void addChild() {
-        if (!isHaveGroup()) {
+        int addPosition = 0;
+        int itemId = 0;
+        int childId = 0;
+
+        if (!isHaveGroup() || mDatas.get(mDatas.size() - 1).getItemType() == DemoItemBean
+                .TYPE_NORMAL) {
             addGroup();
         }
 
-        int addPosition = mDatas.size();
-        int itemId = mDatas.get(mDatas.size() - 1).getItemId();
-        int childId = 0;
+        for (int i = 0; i < mDatas.size(); i++) {
+            if (mDatas.get(i).getItemType() == DemoItemBean.TYPE_GROUP) {
+                itemId = mDatas.get(i).getItemId();
+            }
+        }
 
         for (int i = 0; i < mDatas.size(); i++) {
             if (mDatas.get(i).getItemId() == itemId && mDatas.get(i).getItemType() ==
@@ -189,6 +205,7 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             }
         }
 
+        addPosition = mDatas.size();
         mDatas.add(addPosition, ParseHelper.newChildItem(itemId, childId));
         notifyItemInserted(addPosition);//通知演示插入动画
         notifyItemRangeChanged(addPosition, mDatas.size() - addPosition);//通知数据与界面重新绑定
