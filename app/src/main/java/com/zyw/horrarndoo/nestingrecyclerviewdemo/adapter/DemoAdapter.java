@@ -209,7 +209,7 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
 
         addPosition = mDatas.size();
-        mDatas.add(addPosition, ParseHelper.newChildItem(itemId, childId));
+        mDatas.add(addPosition, ParseHelper.newChildItem(mDatas, itemId, childId));
         notifyItemInserted(addPosition);//通知演示插入动画
         notifyItemRangeChanged(addPosition, mDatas.size() - addPosition);//通知数据与界面重新绑定
     }

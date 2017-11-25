@@ -21,6 +21,7 @@ public class ParseHelper {
             NormalItemBean bean = new NormalItemBean();
             bean.setItemId(i);
             bean.setChecked(false);
+            bean.setItemType(DemoItemBean.TYPE_NORMAL);
             bean.setTitle("Normal: " + i);
             list.add(bean);
         }
@@ -33,6 +34,7 @@ public class ParseHelper {
             List<ChildItemBean> childList = new ArrayList<>();
             GroupItemBean bean = new GroupItemBean();
             bean.setItemId(i);
+            bean.setItemType(DemoItemBean.TYPE_GROUP);
             bean.setTitle("Group: " + i);
             bean.setChecked(false);
 
@@ -40,6 +42,7 @@ public class ParseHelper {
                 ChildItemBean bean1 = new ChildItemBean();
                 bean1.setTitle("group: " + i + " child: " + j);
                 bean1.setChecked(false);
+                bean1.setItemType(DemoItemBean.TYPE_CHILD);
                 bean1.setGroupId(i);//child的groupId对应当前
                 bean1.setItemId(bean.getItemId());//child的itemId和其父group的itemId一致
                 childList.add(bean1);
@@ -54,30 +57,14 @@ public class ParseHelper {
     public static List<DemoItemBean> getParseDatas() {
         List<DemoItemBean> list = new ArrayList<>();
 
-        for (int i = 0; i < getNormalDatas().size(); i++) {
-            NormalItemBean bean = new NormalItemBean();
-            bean.setItemId(getNormalDatas().get(i).getItemId());
-            bean.setItemType(DemoItemBean.TYPE_NORMAL);
-            bean.setChecked(getNormalDatas().get(i).isChecked());
-            bean.setTitle(getNormalDatas().get(i).getTitle());
+        for (NormalItemBean bean : getNormalDatas()) {
             list.add(bean);//normal
         }
 
-        for (int i = 0; i < getGroupDatas().size(); i++) {
-            GroupItemBean bean = new GroupItemBean();
-            bean.setItemId(getGroupDatas().get(i).getItemId());
-            bean.setItemType(DemoItemBean.TYPE_GROUP);
-            bean.setTitle(getGroupDatas().get(i).getTitle());
-            bean.setChecked(getGroupDatas().get(i).isChecked());
+        for (GroupItemBean bean : getGroupDatas()) {
             list.add(bean);//group
 
-            List<ChildItemBean> childs = getGroupDatas().get(i).getChilds();
-            for (int j = 0; j < childs.size(); j++) {
-                ChildItemBean bean1 = new ChildItemBean();
-                bean1.setItemId(childs.get(j).getItemId());
-                bean1.setItemType(DemoItemBean.TYPE_CHILD);
-                bean1.setTitle(childs.get(j).getTitle());
-                bean1.setChecked(childs.get(j).isChecked());
+            for (ChildItemBean bean1 : bean.getChilds()) {
                 list.add(bean1);//child
             }
         }
@@ -161,12 +148,16 @@ public class ParseHelper {
         return bean;
     }
 
-    public static ChildItemBean newChildItem(int itemId, int childId) {
+    public static ChildItemBean newChildItem(List<DemoItemBean> beans, int itemId, int childId) {
+        GroupItemBean groupItemBean = getGroupBean(beans, itemId);
         ChildItemBean bean = new ChildItemBean();
+        bean.setGroupId(itemId);
         bean.setItemId(itemId);
         bean.setItemType(DemoItemBean.TYPE_CHILD);
         bean.setTitle("group: " + itemId + " child: " + childId);
         bean.setChecked(false);
+        if (groupItemBean != null)
+            groupItemBean.getChilds().add(bean);
         return bean;
     }
 }
