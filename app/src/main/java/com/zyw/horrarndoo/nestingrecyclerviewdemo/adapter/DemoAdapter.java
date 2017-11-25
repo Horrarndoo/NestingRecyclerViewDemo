@@ -212,6 +212,10 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mDatas.add(addPosition, ParseHelper.newChildItem(mDatas, itemId, childId));
         notifyItemInserted(addPosition);//通知演示插入动画
         notifyItemRangeChanged(addPosition, mDatas.size() - addPosition);//通知数据与界面重新绑定
+
+        if (onCheckChangeListener != null)
+            onCheckChangeListener.onCheckedChanged(mDatas, addPosition, mDatas.get(addPosition)
+                    .isChecked(), DemoItemBean.TYPE_CHILD);
     }
 
     /**
