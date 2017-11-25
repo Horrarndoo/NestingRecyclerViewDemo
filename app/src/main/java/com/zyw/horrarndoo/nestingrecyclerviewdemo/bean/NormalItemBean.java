@@ -8,6 +8,7 @@ package com.zyw.horrarndoo.nestingrecyclerviewdemo.bean;
 public class NormalItemBean {
     private String title;
     private int itemId;
+    private boolean isChecked;
 
     public int getItemId() {
         return itemId;
@@ -23,5 +24,13 @@ public class NormalItemBean {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

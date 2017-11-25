@@ -20,6 +20,7 @@ public class ParseHelper {
         for (int i = 0; i < 5; i++) {
             NormalItemBean bean = new NormalItemBean();
             bean.setItemId(i);
+            bean.setChecked(false);
             bean.setTitle("Normal: " + i);
             list.add(bean);
         }
@@ -57,6 +58,7 @@ public class ParseHelper {
             DemoItemBean bean = new DemoItemBean();
             bean.setItemId(getNormalDatas().get(i).getItemId());
             bean.setItemType(DemoItemBean.TYPE_NORMAL);
+            bean.setChecked(getNormalDatas().get(i).isChecked());
             bean.setTitle(getNormalDatas().get(i).getTitle());
             list.add(bean);//normal
         }
@@ -142,6 +144,7 @@ public class ParseHelper {
     public static DemoItemBean newNormalItem(int itemId) {
         DemoItemBean bean = new DemoItemBean();
         bean.setItemId(itemId);
+        bean.setChecked(false);
         bean.setTitle("Normal: " + itemId);
         bean.setItemType(DemoItemBean.TYPE_NORMAL);
         return bean;
