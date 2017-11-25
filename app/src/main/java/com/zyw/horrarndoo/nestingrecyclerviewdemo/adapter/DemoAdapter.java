@@ -12,7 +12,10 @@ import com.zyw.horrarndoo.nestingrecyclerviewdemo.R;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.adapter.ViewHolder.ChildViewHolder;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.adapter.ViewHolder.GroupViewHolder;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.adapter.ViewHolder.NormalViewHolder;
+import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.ChildItemBean;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.DemoItemBean;
+import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.GroupItemBean;
+import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.NormalItemBean;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.helper.ParseHelper;
 
 import java.util.List;
@@ -64,21 +67,21 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         Log.w("tag", "onBindViewHolder");
         if (holder instanceof NormalViewHolder) {
             NormalViewHolder nHolder = (NormalViewHolder) holder;
-            nHolder.bindData(mDatas.get(position));
+            nHolder.bindData((NormalItemBean) mDatas.get(position));
             nHolder.tvNormal.setText(mDatas.get(position).getTitle());
             nHolder.cbNormal.setOnCheckedChangeListener(new OnCheckedChangeListener(position,
                     DemoItemBean.TYPE_NORMAL));
             nHolder.cbNormal.setChecked(mDatas.get(position).isChecked());
         } else if (holder instanceof GroupViewHolder) {
             GroupViewHolder gHolder = (GroupViewHolder) holder;
-            gHolder.bindData(mDatas.get(position));
+            gHolder.bindData((GroupItemBean) mDatas.get(position));
             gHolder.tvGroup.setText(mDatas.get(position).getTitle());
             gHolder.cbGroup.setOnCheckedChangeListener(new OnCheckedChangeListener(position,
                     DemoItemBean.TYPE_GROUP));
             gHolder.cbGroup.setChecked(mDatas.get(position).isChecked());
         } else if (holder instanceof ChildViewHolder) {
             ChildViewHolder cHolder = (ChildViewHolder) holder;
-            cHolder.bindData(mDatas.get(position));
+            cHolder.bindData((ChildItemBean) mDatas.get(position));
             cHolder.tvChild.setText(mDatas.get(position).getTitle());
             cHolder.cbChild.setOnCheckedChangeListener(new OnCheckedChangeListener(position,
                     DemoItemBean.TYPE_CHILD));

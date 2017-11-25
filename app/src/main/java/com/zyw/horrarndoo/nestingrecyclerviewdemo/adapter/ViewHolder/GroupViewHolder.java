@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.R;
-import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.DemoItemBean;
+import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.GroupItemBean;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.utils.ToastUtils;
 
 /**
@@ -16,7 +16,7 @@ import com.zyw.horrarndoo.nestingrecyclerviewdemo.utils.ToastUtils;
  */
 
 public class GroupViewHolder extends RecyclerView.ViewHolder {
-    private DemoItemBean bean;
+    private GroupItemBean bean;
     public TextView tvGroup, tvSub1, tvSub2, tvSub3;
     public CheckBox cbGroup;
     public LinearLayout llGroup, subEdit;
@@ -49,7 +49,7 @@ public class GroupViewHolder extends RecyclerView.ViewHolder {
      * 绑定item数据
      * @param bean item数据
      */
-    public void bindData(DemoItemBean bean){
+    public void bindData(GroupItemBean bean){
         this.bean = bean;
     }
 

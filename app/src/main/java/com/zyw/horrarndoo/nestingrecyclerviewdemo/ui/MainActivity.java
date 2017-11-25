@@ -10,7 +10,9 @@ import android.widget.Button;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.R;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.adapter.DemoAdapter;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.adapter.OnCheckChangeListener;
+import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.ChildItemBean;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.DemoItemBean;
+import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.GroupItemBean;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.helper.ParseHelper;
 
 import java.util.List;
@@ -112,9 +114,9 @@ public class MainActivity extends AppCompatActivity {
 
             beans.get(position).setChecked(isChecked);
 
-            DemoItemBean groupBean = ParseHelper.getGroupBean(beans, itemId);
+            GroupItemBean groupBean = ParseHelper.getGroupBean(beans, itemId);
 
-            List<DemoItemBean> childList = ParseHelper.getChildList(beans, position);
+            List<ChildItemBean> childList = ParseHelper.getChildList(beans, position);
             for (int i = 0; i < childList.size(); i++) {
                 if (!childList.get(i).isChecked()) {//只要有一个child没有选中，group就不是选中
                     if (groupBean.isChecked() && !isChecked) {//group为选中状态

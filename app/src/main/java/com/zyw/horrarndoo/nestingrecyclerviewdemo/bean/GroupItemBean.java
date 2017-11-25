@@ -7,19 +7,8 @@ import java.util.List;
  * <p>
  */
 
-public class GroupItemBean {
-    private String title;
-    private boolean isChecked;
-    private int itemId;
+public class GroupItemBean extends DemoItemBean{
     private List<ChildItemBean> childs;
-
-    public int getItemId() {
-        return itemId;
-    }
-
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
-    }
 
     public List<ChildItemBean> getChilds() {
         return childs;
@@ -27,22 +16,5 @@ public class GroupItemBean {
 
     public void setChilds(List<ChildItemBean> childs) {
         this.childs = childs;
-    }
-
-    public String getTitle() {
-
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public boolean isChecked() {
-        return isChecked;
-    }
-
-    public void setChecked(boolean checked) {
-        isChecked = checked;
     }
 }

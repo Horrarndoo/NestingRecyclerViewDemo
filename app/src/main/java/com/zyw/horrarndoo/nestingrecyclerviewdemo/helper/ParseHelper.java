@@ -55,7 +55,7 @@ public class ParseHelper {
         List<DemoItemBean> list = new ArrayList<>();
 
         for (int i = 0; i < getNormalDatas().size(); i++) {
-            DemoItemBean bean = new DemoItemBean();
+            NormalItemBean bean = new NormalItemBean();
             bean.setItemId(getNormalDatas().get(i).getItemId());
             bean.setItemType(DemoItemBean.TYPE_NORMAL);
             bean.setChecked(getNormalDatas().get(i).isChecked());
@@ -64,7 +64,7 @@ public class ParseHelper {
         }
 
         for (int i = 0; i < getGroupDatas().size(); i++) {
-            DemoItemBean bean = new DemoItemBean();
+            GroupItemBean bean = new GroupItemBean();
             bean.setItemId(getGroupDatas().get(i).getItemId());
             bean.setItemType(DemoItemBean.TYPE_GROUP);
             bean.setTitle(getGroupDatas().get(i).getTitle());
@@ -73,7 +73,7 @@ public class ParseHelper {
 
             List<ChildItemBean> childs = getGroupDatas().get(i).getChilds();
             for (int j = 0; j < childs.size(); j++) {
-                DemoItemBean bean1 = new DemoItemBean();
+                ChildItemBean bean1 = new ChildItemBean();
                 bean1.setItemId(childs.get(j).getItemId());
                 bean1.setItemType(DemoItemBean.TYPE_CHILD);
                 bean1.setTitle(childs.get(j).getTitle());
@@ -90,15 +90,15 @@ public class ParseHelper {
      * @param beans    整个数据list
      * @param position 当前group的position
      */
-    public static List<DemoItemBean> getChildList(List<DemoItemBean> beans, int position) {
-        List<DemoItemBean> childList = new ArrayList<>();
+    public static List<ChildItemBean> getChildList(List<DemoItemBean> beans, int position) {
+        List<ChildItemBean> childList = new ArrayList<>();
         for (DemoItemBean bean : beans) {
             //item id不相同直接跳过
             if (bean.getItemId() != beans.get(position).getItemId())
                 continue;
 
             if (bean.getItemType() == DemoItemBean.TYPE_CHILD) {
-                childList.add(bean);
+                childList.add((ChildItemBean) bean);
             }
         }
         return childList;
@@ -111,10 +111,10 @@ public class ParseHelper {
      * @param itemId
      * @return
      */
-    public static DemoItemBean getGroupBean(List<DemoItemBean> beans, int itemId) {
+    public static GroupItemBean getGroupBean(List<DemoItemBean> beans, int itemId) {
         for (DemoItemBean bean : beans) {
             if (bean.getItemType() == DemoItemBean.TYPE_GROUP && bean.getItemId() == itemId)
-                return bean;
+                return (GroupItemBean) bean;
         }
         return null;
     }
@@ -141,8 +141,8 @@ public class ParseHelper {
      * @param itemId position
      * @return normal item数据
      */
-    public static DemoItemBean newNormalItem(int itemId) {
-        DemoItemBean bean = new DemoItemBean();
+    public static NormalItemBean newNormalItem(int itemId) {
+        NormalItemBean bean = new NormalItemBean();
         bean.setItemId(itemId);
         bean.setChecked(false);
         bean.setTitle("Normal: " + itemId);
@@ -150,18 +150,19 @@ public class ParseHelper {
         return bean;
     }
 
-    public static DemoItemBean newGroupItem(int itemId) {
+    public static GroupItemBean newGroupItem(int itemId) {
         List<ChildItemBean> childList = new ArrayList<>();
-        DemoItemBean bean = new DemoItemBean();
+        GroupItemBean bean = new GroupItemBean();
         bean.setItemId(itemId);
         bean.setItemType(DemoItemBean.TYPE_GROUP);
         bean.setTitle("Group: " + itemId);
+        bean.setChilds(childList);
         bean.setChecked(false);
         return bean;
     }
 
-    public static DemoItemBean newChildItem(int itemId, int childId) {
-        DemoItemBean bean = new DemoItemBean();
+    public static ChildItemBean newChildItem(int itemId, int childId) {
+        ChildItemBean bean = new ChildItemBean();
         bean.setItemId(itemId);
         bean.setItemType(DemoItemBean.TYPE_CHILD);
         bean.setTitle("group: " + itemId + " child: " + childId);

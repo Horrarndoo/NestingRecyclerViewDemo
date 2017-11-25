@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.R;
-import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.DemoItemBean;
+import com.zyw.horrarndoo.nestingrecyclerviewdemo.bean.NormalItemBean;
 import com.zyw.horrarndoo.nestingrecyclerviewdemo.utils.ToastUtils;
 
 /**
@@ -16,7 +16,7 @@ import com.zyw.horrarndoo.nestingrecyclerviewdemo.utils.ToastUtils;
  */
 
 public class NormalViewHolder extends RecyclerView.ViewHolder {
-    private DemoItemBean bean;
+    private NormalItemBean bean;
     public TextView tvNormal;
     public LinearLayout llNormal;
     public CheckBox cbNormal;
@@ -33,7 +33,7 @@ public class NormalViewHolder extends RecyclerView.ViewHolder {
      * 绑定item数据
      * @param bean item数据
      */
-    public void bindData(DemoItemBean bean){
+    public void bindData(NormalItemBean bean){
         this.bean = bean;
     }
 
