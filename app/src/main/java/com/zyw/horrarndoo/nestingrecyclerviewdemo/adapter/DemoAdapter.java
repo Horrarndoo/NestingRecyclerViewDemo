@@ -127,7 +127,7 @@ public class DemoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             if (mDatas.get(i).isChecked()) {
                 mDatas.remove(i);
                 notifyItemRemoved(i);
-                notifyItemRangeChanged(0, mDatas.size());
+                notifyItemRangeChanged(i, mDatas.size());
             }
         }
     }
